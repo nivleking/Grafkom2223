@@ -74,7 +74,9 @@ public class Main {
                         )
                 )
         ));
-        object2DS.add(new Rectangle(
+
+
+        objectRectangles.add(new Rectangle(
                 Arrays.asList(
                         //shaderFile lokasi menyesuaikan objectnya
                         new ShaderProgram.ShaderModuleData
@@ -86,14 +88,122 @@ public class Main {
                 ),
                 new ArrayList<>(
                         List.of(
-                                new Vector3f(0.0f,0.0f,0.0f),
-                                new Vector3f(0.5f,0.0f,0.0f),
-                                new Vector3f(0.0f,0.5f,0.0f),
-                                new Vector3f(0.0f,0.0f,0.5f)
+                                new Vector3f(-1.0f,-1.0f,0.0f),
+                                new Vector3f(1.0f,-1.0f,0.0f),
+                                new Vector3f(-1.0f,-0.6f,0.0f),
+                                new Vector3f(1.0f,-0.6f,0.0f)
                         )
                 ),
-                new Vector4f(1.0f,0.0f,1.0f,1.0f),
-                Arrays.asList(0,1,3,3,2,3)
+                new Vector4f(0.0f,100.0f,0.0f,0.0f),
+                Arrays.asList(0,1,2,1,2,3)
+        ));
+
+        objectRectangles.add(new Rectangle(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(-1.0f,-0.6f,0.0f),
+                                new Vector3f(1.0f,-0.6f,0.0f),
+                                new Vector3f(-1.0f,1.0f,0.0f),
+                                new Vector3f(1.0f,1.0f,0.0f)
+                        )
+                ),
+                new Vector4f(0.0f,0.0f,32.0f,255.0f),
+                Arrays.asList(0,1,2,1,2,3)
+        ));
+
+        objectRectangles.add(new Rectangle(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(-0.66f,-0.7f,0.0f),
+                                new Vector3f(0.66f,-0.7f,0.0f),
+                                new Vector3f(-0.66f,0.3f,0.0f),
+                                new Vector3f(0.66f,0.3f,0.0f)
+                        )
+                ),
+                new Vector4f(255,100,0.0f,0.0f),
+                Arrays.asList(0,1,2,1,2,3)
+        ));
+
+        objectRectangles.add(new Rectangle(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(-0.8f,-0.1f,0.0f),
+                                new Vector3f(0.8f,-0.1f,0.0f),
+                                new Vector3f(-0.65f,0.34f,0.0f),
+                                new Vector3f(0.65f,0.34f,0.0f)
+                        )
+                ),
+                new Vector4f(255.0f,0.0f,0.0f,0.0f),
+                Arrays.asList(0,1,2,1,2,3)
+        ));
+
+        object2DS.add(new Object2D(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(0.0f,0.5f,0.0f),
+                                new Vector3f(0.66f,-0.1f,0.0f),
+                                new Vector3f(0.74f,-0.1f,0.0f)
+                        )
+                ),
+                new Vector4f(255.0f,100.0f,0.0f,0.0f)
+        ));
+
+        objectRectangles.add(new Rectangle(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(0.4f,0.2f,0.0f),
+                                new Vector3f(0.5f,0.2f,0.0f),
+                                new Vector3f(0.4f,0.45f,0.0f),
+                                new Vector3f(0.5f,0.45f,0.0f)
+                        )
+                ),
+                new Vector4f(255.0f,100.0f,0.0f,0.0f),
+                Arrays.asList(0,1,2,1,2,3)
         ));
     }
 
@@ -107,6 +217,9 @@ public class Main {
             //code:
             for (Object2D i: object2DS) {
                 i.drawVerticesColor();
+            }
+            for (Object2D i: objectRectangles){
+                i.draw();
             }
             //Restore state
             glDisableVertexAttribArray(0);

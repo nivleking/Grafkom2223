@@ -1,7 +1,6 @@
 #version 330
 //kalau mau hanya dari frag trs keluar
 uniform vec4 uni_color;
-
 out vec4 frag_color;
 
 
