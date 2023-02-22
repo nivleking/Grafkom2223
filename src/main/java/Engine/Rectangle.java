@@ -5,6 +5,9 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import java.util.List;
+
+import static org.lwjgl.opengl.GL11.glLineWidth;
+import static org.lwjgl.opengl.GL11.glPointSize;
 import static org.lwjgl.opengl.GL15C.*;
 
 public class Rectangle extends Object2D{
@@ -25,4 +28,11 @@ public class Rectangle extends Object2D{
         glDrawElements(GL_TRIANGLES, index.size(), GL_UNSIGNED_INT, 0);
     }
 
+    public void drawStars() {
+        drawSetup();
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+        glLineWidth(2);
+        glPointSize(2);
+        glDrawElements(GL_LINE_LOOP, index.size(), GL_UNSIGNED_INT, 0);
+    }
 }

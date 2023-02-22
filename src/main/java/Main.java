@@ -20,8 +20,9 @@ public class Main {
     ArrayList<Object2D> object2DS = new ArrayList<>();
     ArrayList<Object2D> objectRectangles = new ArrayList<>();
 
-    List<Vector3f> lingkaran = new ArrayList<>();
+    ArrayList<Rectangle> objectStars = new ArrayList<>();
 
+    List<Vector3f> lingkaran = new ArrayList<>();
     public void init() {
         window.init();
 
@@ -88,38 +89,38 @@ public class Main {
                 ),
                 new ArrayList<>(
                         List.of(
-                                new Vector3f(-1.0f,-1.0f,0.0f),
-                                new Vector3f(1.0f,-1.0f,0.0f),
-                                new Vector3f(-1.0f,-0.6f,0.0f),
-                                new Vector3f(1.0f,-0.6f,0.0f)
+                                new Vector3f(-1.5f,-1.0f,0.0f),
+                                new Vector3f(1.5f,-1.0f,0.0f),
+                                new Vector3f(-1.5f,-0.6f,0.0f),
+                                new Vector3f(1.5f,-0.6f,0.0f)
                         )
                 ),
-                new Vector4f(0.0f,1.0f,0.0f,1.0f),
+                new Vector4f(0.0f,0.5f,0.0f,1.0f),
                 Arrays.asList(0,1,2,1,2,3)
         ));
 
         //rumah pp #1
-//        objectRectangles.add(new Rectangle(
-//                Arrays.asList(
-//                        //shaderFile lokasi menyesuaikan objectnya
-//                        new ShaderProgram.ShaderModuleData
-//                                ("resources/shaders/scene.vert"
-//                                        , GL_VERTEX_SHADER),
-//                        new ShaderProgram.ShaderModuleData
-//                                ("resources/shaders/scene.frag"
-//                                        , GL_FRAGMENT_SHADER)
-//                ),
-//                new ArrayList<>(
-//                        List.of(
-//                                new Vector3f(-0.66f,-0.7f,0.0f),
-//                                new Vector3f(0.66f,-0.7f,0.0f),
-//                                new Vector3f(-0.66f,0.3f,0.0f),
-//                                new Vector3f(0.66f,0.3f,0.0f)
-//                        )
-//                ),
-//                new Vector4f(0.79f,0.6f,0.0f,0.0f),
-//                Arrays.asList(0,1,2,1,2,3)
-//        ));
+        objectRectangles.add(new Rectangle(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(-0.66f,-0.7f,0.0f),
+                                new Vector3f(0.66f,-0.7f,0.0f),
+                                new Vector3f(-0.66f,-0.1f,0.0f),
+                                new Vector3f(0.66f,-0.1f,0.0f)
+                        )
+                ),
+                new Vector4f(0.79f,0.6f,0.0f,0.0f),
+                Arrays.asList(0,1,2,1,2,3)
+        ));
 
         //rumah trapesium
         objectRectangles.add(new Rectangle(
@@ -134,10 +135,10 @@ public class Main {
                 ),
                 new ArrayList<>(
                         List.of(
-                                new Vector3f(-0.8f,-0.1f,0.0f),
-                                new Vector3f(0.8f,-0.1f,0.0f),
-                                new Vector3f(-0.65f,0.34f,0.0f),
-                                new Vector3f(0.65f,0.34f,0.0f)
+                                new Vector3f(-0.75f,-0.1f,0.0f),
+                                new Vector3f(0.75f,-0.1f,0.0f),
+                                new Vector3f(-0.59f,0.31f,0.0f),
+                                new Vector3f(0.59f,0.31f,0.0f)
                         )
                 ),
                 new Vector4f(0.95f,0.16f,0.0f,0.0f),
@@ -159,8 +160,8 @@ public class Main {
                         List.of(
                                 new Vector3f(-0.66f,-0.1f,0.0f),
                                 new Vector3f(-0.36f,-0.1f,0.0f),
-                                new Vector3f(-0.66f,0.1f,0.0f),
-                                new Vector3f(-0.6f,0.3f,0.0f)
+                                new Vector3f(-0.66f,0.005f,0.0f),
+                                new Vector3f(-0.56f,0.26f,0.0f)
                         )
                 ),
                 new Vector4f(0.79f,0.6f,0.0f,1.0f),
@@ -180,18 +181,41 @@ public class Main {
                 ),
                 new ArrayList<>(
                         List.of(
+                                new Vector3f(0.3f,0.2f,0.0f),
                                 new Vector3f(0.4f,0.2f,0.0f),
-                                new Vector3f(0.5f,0.2f,0.0f),
-                                new Vector3f(0.4f,0.45f,0.0f),
-                                new Vector3f(0.5f,0.45f,0.0f)
+                                new Vector3f(0.3f,0.45f,0.0f),
+                                new Vector3f(0.4f,0.45f,0.0f)
                         )
                 ),
                 new Vector4f(0.79f,0.6f,0.0f,0.0f),
                 Arrays.asList(0,1,2,1,2,3)
         ));
 
+        //cerobong atas
+        objectRectangles.add(new Rectangle(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(0.25f,0.5f,0.0f),
+                                new Vector3f(0.45f,0.5f,0.0f),
+                                new Vector3f(0.25f,0.45f,0.0f),
+                                new Vector3f(0.45f,0.45f,0.0f)
+                        )
+                ),
+                new Vector4f(0.7f,0.16f,0.0f,0.0f),
+                Arrays.asList(0,1,2,1,2,3)
+        ));
+
         //circle bulan #1
-        lingkaran = generateCircle(-0.78f,0.7f,0.1f);
+        lingkaran = generateCircle(-0.75f,0.7f,0.1f);
         object2DS.add(new Object2D(
                 Arrays.asList(
                         //shaderFile lokasi menyesuaikan objectnya
@@ -207,7 +231,7 @@ public class Main {
         ));
 
         //circle bulan #2
-        lingkaran = generateCircle(-0.73f,0.7f,0.1f);
+        lingkaran = generateCircle(-0.7f,0.7f,0.1f);
         object2DS.add(new Object2D(
                 Arrays.asList(
                         //shaderFile lokasi menyesuaikan objectnya
@@ -220,6 +244,105 @@ public class Main {
                 ),
                 lingkaran,
                 new Vector4f(0.0f,0.0f,1.0f,0.0f)
+        ));
+
+        //oval asap #1
+        lingkaran = generateCircle(0.35f,0.57f,0.1f, 0.05f);
+        object2DS.add(new Object2D(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                lingkaran,
+                new Vector4f(0.5f,0.5f,0.5f,0.0f)
+        ));
+
+        //oval asap #2
+        lingkaran = generateCircle(0.42f,0.64f,0.14f, 0.05f);
+        object2DS.add(new Object2D(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                lingkaran,
+                new Vector4f(0.5f,0.5f,0.5f,0.0f)
+        ));
+
+        //oval asap #3
+        lingkaran = generateCircle(0.54f,0.71f,0.2f, 0.05f);
+        object2DS.add(new Object2D(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                lingkaran,
+                new Vector4f(0.5f,0.5f,0.5f,0.0f)
+        ));
+
+        //bintang #1
+        lingkaran = generateStars(-0.32f, 0.54f, 0.05f);
+        objectStars.add(new Rectangle(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                lingkaran,
+                new Vector4f(0.5f,0.5f,0.5f,0.0f),
+                Arrays.asList(0,3,1,4,2)
+        ));
+
+        //bintang #2
+        lingkaran = generateStars(-0.04f, 0.90f, 0.02f);
+        objectStars.add(new Rectangle(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                lingkaran,
+                new Vector4f(0.5f,0.5f,0.5f,0.0f),
+                Arrays.asList(0,3,1,4,2)
+        ));
+
+        //bintang #1
+        lingkaran = generateStars(0.74f, 0.86f, 0.05f);
+        objectStars.add(new Rectangle(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                lingkaran,
+                new Vector4f(0.5f,0.5f,0.5f,0.0f),
+                Arrays.asList(0,3,1,4,2)
         ));
     }
 
@@ -236,6 +359,9 @@ public class Main {
             }
             for (Object2D i: objectRectangles){
                 i.draw();
+            }
+            for (Rectangle i: objectStars){
+                i.drawStars();
             }
 
             //Restore state
@@ -277,8 +403,8 @@ public class Main {
     public static List<Vector3f> generateStars(float x, float y, float radius) {
         ArrayList<Vector3f> lingkaran = new ArrayList<>();
         for (double i = 0; i < 360; i += 72) {
-            float x2 = (float) (x + radius * Math.cos(Math.toRadians(i)));
-            float y2 = (float) (y + radius * Math.sin(Math.toRadians(i)));
+            float x2 = (float) (x + radius * -Math.cos(Math.toRadians(i)));
+            float y2 = (float) (y + radius * -Math.sin(Math.toRadians(i)));
 
             lingkaran.add(new Vector3f(x2, y2, 0));
         }
