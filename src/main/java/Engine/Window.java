@@ -19,6 +19,8 @@ public class Window {
     private int width, height;
     private String title;
 
+    private MouseInput mouseInput;
+
 
     public Window(int width, int height, String title){
         this.width = width;
@@ -66,10 +68,12 @@ public class Window {
             throw new RuntimeException("Failed to create the GLFW window");
 
         // Setup a key callback. It will be called every time a key is pressed, repeated or released.
+        // buat keyboard di main
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
         });
+
 
         // Get the thread stack and push a new frame
         try ( MemoryStack stack = stackPush() ) {
@@ -98,6 +102,8 @@ public class Window {
         // Make the window visible
         glfwShowWindow(window);
 
+        mouseInput = new MouseInput(window);
+
     }
 
     public void update(){
@@ -111,6 +117,7 @@ public class Window {
         if(glfwWindowShouldClose(window))
             open = false;
 
+        mouseInput.input();
     }
 
     public void cleanup(){
@@ -123,5 +130,7 @@ public class Window {
         return glfwGetKey(window, keyCode) == GLFW_PRESS;
     }
 
-
+    public MouseInput getMouseInput() {
+        return mouseInput;
+    }
 }
