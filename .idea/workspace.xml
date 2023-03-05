@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a032c71-f510-4f1d-80d7-383208eaaee3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_02_2023_15_06_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_02_2023_15_06__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/MouseInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/MouseInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Object2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Object2D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,13 +46,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/Kelvin Sidharta Sie/IdeaProjects/Grafkom-master",
+    "settings.editor.selected.configurable": "preferences.editor"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />

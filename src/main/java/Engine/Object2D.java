@@ -8,7 +8,7 @@ import static org.lwjgl.opengl.GL30.*;
 import java.util.List;
 
 public class Object2D extends ShaderProgram{
-    List<Vector3f> vertices;
+    public List<Vector3f> vertices;
 
     //untuk mengirim vertex ke window
     int vao;
@@ -102,8 +102,8 @@ public class Object2D extends ShaderProgram{
 
     public void drawLine() {
         drawSetup();
-        glLineWidth(5);
-        glPointSize(5);
+        glLineWidth(1);
+        glPointSize(0);
         glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
     }
 

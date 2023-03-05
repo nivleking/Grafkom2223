@@ -20,12 +20,13 @@ public class Main {
     private Window window = new Window(800,800, "Hello World");
     ArrayList<Object2D> object2DS = new ArrayList<>();
     ArrayList<Object2D> objectRectangles = new ArrayList<>();
-
-    ArrayList<Object2D> objectPointsControl = new ArrayList<>();
-
-    ArrayList<Rectangle> objectStars = new ArrayList<>();
-
     List<Vector3f> lingkaran = new ArrayList<>();
+    ArrayList<Rectangle> objectStars = new ArrayList<>();
+    ArrayList<Object2D> objectPointsControl = new ArrayList<>();
+    Object2D controlLine;
+    ArrayList<Object2D> kurva =new ArrayList<>();
+    ArrayList<Vector3f> centerB = new ArrayList<>();
+
 
     //yg berbentuk kurva/lengkungan itu paling mudah adalah font
     //kenapa harus pakai rumus? biar lebih presisi karna kalau satu" tidak presisi
@@ -355,20 +356,19 @@ public class Main {
 //                new Vector4f(0.5f,0.5f,0.5f,0.0f),
 //                Arrays.asList(0,3,1,4,2)
 //        ));
-
-        objectPointsControl.add(new Object2D(
-                Arrays.asList(
-                        //shaderFile lokasi menyesuaikan objectnya
-                        new ShaderProgram.ShaderModuleData
-                                ("resources/shaders/scene.vert"
-                                        , GL_VERTEX_SHADER),
-                        new ShaderProgram.ShaderModuleData
-                                ("resources/shaders/scene.frag"
-                                        , GL_FRAGMENT_SHADER)
-                ),
-                new ArrayList<>(),
-                new Vector4f(0.0f,1.0f,1.0f,1.0f)
-        ));
+//        objectPointsControl.add(new Object2D(
+//                Arrays.asList(
+//                        //shaderFile lokasi menyesuaikan objectnya
+//                        new ShaderProgram.ShaderModuleData
+//                                ("resources/shaders/scene.vert"
+//                                        , GL_VERTEX_SHADER),
+//                        new ShaderProgram.ShaderModuleData
+//                                ("resources/shaders/scene.frag"
+//                                        , GL_FRAGMENT_SHADER)
+//                ),
+//                new ArrayList<>(),
+//                new Vector4f(0.0f,1.0f,1.0f,1.0f)
+//        ));
     }
 
     public void input() {
@@ -387,34 +387,61 @@ public class Main {
             //minus supaya y nya di atas
             pos.y = (pos.y - (window.getHeight())/2.0f) / (-window.getHeight()/2.0f);
 
-            objectRectangles.add(new Rectangle(
-                    Arrays.asList(
-                            //shaderFile lokasi menyesuaikan objectnya
-                            new ShaderProgram.ShaderModuleData
-                                    ("resources/shaders/scene.vert"
-                                            , GL_VERTEX_SHADER),
-                            new ShaderProgram.ShaderModuleData
-                                    ("resources/shaders/scene.frag"
-                                            , GL_FRAGMENT_SHADER)
-                    ),
-                    new ArrayList<>(
-                            List.of(
-                                    new Vector3f(pos.x + 0.05f,pos.y + 0.05f,0.0f),
-                                    new Vector3f(pos.x + 0.05f,pos.y - 0.05f,0.0f),
-                                    new Vector3f(pos.x - 0.05f,pos.y + 0.05f,0.0f),
-                                    new Vector3f(pos.x - 0.05f,pos.y - 0.05f,0.0f)
-                            )
-                    ),
-                    new Vector4f(0.7f,0.16f,0.0f,0.0f),
-                    Arrays.asList(0,1,2,1,2,3)
-            ));
             //agar kliknya tidak kelebihan lebih dari 1x
             //pos.x < tidka bisa jadi -1 dan pos.y jg > jgn 1
-            if ((!(pos.x > 1 || pos.x < -0.97) && !(pos.y > 0.97 || pos.y <-1))) {
-                System.out.println("x : " + pos.x + " y : " + pos.y);
+            if ((!(pos.x > 1 || pos.x < -0.95) && !(pos.y > 0.95 || pos.y <-1))) {
+//                System.out.println("x : " + pos.x + " y : " + pos.y);
 
                 //dibuat index dalam getnya
-                objectPointsControl.get(0).addVertices(new Vector3f(pos.x, pos.y, 0));
+                if (objectPointsControl.isEmpty() || checkOverlap(pos) == -1) {
+                    objectPointsControl.add(new Rectangle(
+                            Arrays.asList(
+                                    //shaderFile lokasi menyesuaikan objectnya
+                                    new ShaderProgram.ShaderModuleData
+                                            ("resources/shaders/scene.vert"
+                                                    , GL_VERTEX_SHADER),
+                                    new ShaderProgram.ShaderModuleData
+                                            ("resources/shaders/scene.frag"
+                                                    , GL_FRAGMENT_SHADER)
+                            ),
+                            new ArrayList<>(
+                                    List.of(
+                                            new Vector3f(pos.x + 0.05f,pos.y - 0.05f,0.0f),
+                                            new Vector3f(pos.x + 0.05f,pos.y + 0.05f,0.0f),
+                                            new Vector3f(pos.x - 0.05f,pos.y + 0.05f,0.0f),
+                                            new Vector3f(pos.x - 0.05f,pos.y - 0.05f,0.0f)
+                                    )
+                            ),
+                            new Vector4f(0.0f,0.16f,0.7f,0.0f),
+                            Arrays.asList(0,1,2,0,2,3)
+                    ));
+
+                    centerB.add(new Vector3f(pos.x, pos.y, 0));
+
+                    controlLine = new Object2D(Arrays.asList(
+                            // shaderFile lokasi menyesuaikan objectnya
+                            new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                            new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                    ),
+                            centerB,
+                            new Vector4f(1, 0.5f, 0.5f, 0.5f));
+
+                    objectPointsControl.get(objectPointsControl.size() - 1).setVAOVBO();
+                    controlLine.setVAOVBO();
+
+//                    objectPointsControl.get(0).addVertices(new Vector3f(pos.x, pos.y, 0));
+                }
+                //drag
+                if (!objectPointsControl.isEmpty() && checkOverlap(pos) != -1) {
+                    int clickedBox = checkOverlap(pos);
+                    objectPointsControl.get(clickedBox).vertices.set(0, new Vector3f(pos.x + 0.05f, pos.y - 0.05f, 0));
+                    objectPointsControl.get(clickedBox).vertices.set(1, new Vector3f(pos.x + 0.05f, pos.y + 0.05f, 0));
+                    objectPointsControl.get(clickedBox).vertices.set(2, new Vector3f(pos.x - 0.05f, pos.y + 0.05f, 0));
+                    objectPointsControl.get(clickedBox).vertices.set(3, new Vector3f(pos.x - 0.05f, pos.y - 0.05f, 0));
+                    objectPointsControl.get(clickedBox).setVAOVBO();
+                    centerB.set(clickedBox, new Vector3f(pos.x, pos.y, 0));
+                    controlLine.setVAOVBO();
+                }
             }
         }
     }
@@ -423,22 +450,29 @@ public class Main {
         while(window.isOpen()) {
             window.update();
             //command di bawah berjalan selama 1x frame, gambarnya direset hitam setiap kali
-            glClearColor(0.0f,0.0f,1.0f,0.0f);
+            glClearColor(0.1f,0.1f,0.1f,0.1f);
             GL.createCapabilities();
 
+            bezierCurve();
             input();
             //code:
-            for (Object2D i: object2DS) {
-                i.draw();
-            }
-            for (Object2D i: objectRectangles){
-                i.draw();
+//            for (Object2D i: object2DS) {
+//                i.draw();
+//            }
+//            for (Rectangle i: objectStars){
+//                i.drawStars();
+//            }
+//            for (Object2D i: objectRectangles){
+//                i.draw();
+//            }
+            if (controlLine != null) {
+                controlLine.drawLine();
             }
             for (Object2D i: objectPointsControl){
-                i.drawLine();
+                i.draw();
             }
-            for (Rectangle i: objectStars){
-                i.drawStars();
+            for (Object2D i: kurva){
+                i.drawLine();
             }
 
             //Restore state
@@ -453,6 +487,73 @@ public class Main {
 
         glfwTerminate();
         glfwSetErrorCallback(null).free();
+    }
+
+    public int checkOverlap(Vector2f pos) {
+        int index = 0;
+        int collapse = -1;
+        for (Object2D i : objectPointsControl) {
+            boolean collisionX = (pos.x + 0.05f <= i.vertices.get(2).x + 0.1f && i.vertices.get(2).x <= pos.x + 0.05f) ||
+                    (pos.x - 0.05f <= i.vertices.get(2).x + 0.1f && i.vertices.get(2).x <= pos.x + 0.05f);
+            boolean collisionY = (pos.y + 0.05f <= i.vertices.get(3).y + 0.1f && i.vertices.get(3).y <= pos.y + 0.05f) ||
+                    (pos.y - 0.05f <= i.vertices.get(3).y + 0.1f && i.vertices.get(3).y <= pos.y + 0.05f);
+
+            if (collisionX && collisionY) {
+                collapse = index;
+                break;
+            }
+            index++;
+        }
+
+        return collapse;
+    }
+
+    public static int fact(int n) {
+        if (n >= 1)
+            return n * fact(n - 1);
+        else
+            return 1;
+    }
+
+    public static int combi(int n, int i) {
+        return fact(n) / (fact(n-i) * fact(i));
+    }
+
+    public static ArrayList<Integer> pascal(int n) {
+        ArrayList<Integer> res = new ArrayList<>();
+
+        for (int i = 0; i < n; i++)
+            res.add(combi(n - 1, i));
+
+        return res;
+    }
+
+    public void bezierCurve() {
+        kurva.clear();
+        ArrayList<Integer> pascal = pascal(centerB.size());
+        ArrayList<Vector3f> titikKurva = new ArrayList<>();
+        if (centerB.size() > 2) {
+            for (float t = 0; t <= 1; t += 0.01) {
+                float x = 0;
+                float y = 0;
+
+                for (int i = 0; i <= centerB.size() - 1; i++) {
+                    x+=(pascal.get(i)*centerB.get(i).x*Math.pow(1-t,(centerB.size()-1)-i)*Math.pow(t,i));
+                    y+=(pascal.get(i)*centerB.get(i).y*Math.pow(1-t,(centerB.size()-1)-i)*Math.pow(t,i));
+                }
+                Vector3f temp = new Vector3f(x,y,0);
+                titikKurva.add(temp);
+            }
+
+            kurva.add(new Object2D(
+                        Arrays.asList(
+                            new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                            new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        titikKurva,
+                        new Vector4f(0.9f, 1, 0, 1)
+            ));
+        }
+
     }
 
     public static List<Vector3f> generateCircle(float x, float y, float radius) {
