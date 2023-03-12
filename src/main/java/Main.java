@@ -1,7 +1,4 @@
-import Engine.Object2D;
-import Engine.Rectangle;
-import Engine.ShaderProgram;
-import Engine.Window;
+import Engine.*;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -26,6 +23,7 @@ public class Main {
     Object2D controlLine;
     ArrayList<Object2D> kurva =new ArrayList<>();
     ArrayList<Vector3f> centerB = new ArrayList<>();
+    ArrayList<Sphere> sphere = new ArrayList<>();
 
 
     //yg berbentuk kurva/lengkungan itu paling mudah adalah font
@@ -43,6 +41,18 @@ public class Main {
 
         //codingan harus taruh ditaruh di bagian bawah beriikut:
         //code
+        sphere.add(new Sphere(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(),
+                new Vector4f(0,1,0,1),
+                Arrays.asList(0f, 0f,0f),
+                0.5f, 0.5f, 0.5f
+        ));
+
 //        object2DS.add(new Object2D(
 //                Arrays.asList(
 //                        //shaderFile lokasi menyesuaikan objectnya
@@ -101,10 +111,10 @@ public class Main {
 //                ),
 //                new ArrayList<>(
 //                        List.of(
-//                                new Vector3f(-1.5f,-1.0f,0.0f),
-//                                new Vector3f(1.5f,-1.0f,0.0f),
-//                                new Vector3f(-1.5f,-0.6f,0.0f),
-//                                new Vector3f(1.5f,-0.6f,0.0f)
+//                                new Vector3f(-0.5f,0.5f,0.0f),
+//                                new Vector3f(0.5f,0.5f,0.0f),
+//                                new Vector3f(-0.5f,-0.5f,0.0f),
+//                                new Vector3f(0.5f,-0.5f,0.0f)
 //                        )
 //                ),
 //                new Vector4f(0.0f,0.5f,0.0f,1.0f),
@@ -389,7 +399,7 @@ public class Main {
 
             //agar kliknya tidak kelebihan lebih dari 1x
             //pos.x < tidka bisa jadi -1 dan pos.y jg > jgn 1
-            if ((!(pos.x > 1 || pos.x < -0.95) && !(pos.y > 0.95 || pos.y <-1))) {
+            if ((!(pos.x > 1 || pos.x < -0.97) && !(pos.y > 0.97 || pos.y <-1))) {
 //                System.out.println("x : " + pos.x + " y : " + pos.y);
 
                 //dibuat index dalam getnya
@@ -413,7 +423,7 @@ public class Main {
                                     )
                             ),
                             new Vector4f(0.0f,0.16f,0.7f,0.0f),
-                            Arrays.asList(0,1,2,0,2,3)
+                            Arrays.asList(1,0,2,0,2,3)
                     ));
 
                     centerB.add(new Vector3f(pos.x, pos.y, 0));
@@ -462,9 +472,9 @@ public class Main {
 //            for (Rectangle i: objectStars){
 //                i.drawStars();
 //            }
-//            for (Object2D i: objectRectangles){
-//                i.draw();
-//            }
+            for (Sphere i: sphere){
+                i.draw();
+            }
             if (controlLine != null) {
                 controlLine.drawLine();
             }
@@ -493,9 +503,11 @@ public class Main {
         int index = 0;
         int collapse = -1;
         for (Object2D i : objectPointsControl) {
-            boolean collisionX = (pos.x + 0.05f <= i.vertices.get(2).x + 0.1f && i.vertices.get(2).x <= pos.x + 0.05f) ||
+            boolean collisionX =
+                    (pos.x + 0.05f <= i.vertices.get(2).x + 0.1f && i.vertices.get(2).x <= pos.x + 0.05f) ||
                     (pos.x - 0.05f <= i.vertices.get(2).x + 0.1f && i.vertices.get(2).x <= pos.x + 0.05f);
-            boolean collisionY = (pos.y + 0.05f <= i.vertices.get(3).y + 0.1f && i.vertices.get(3).y <= pos.y + 0.05f) ||
+            boolean collisionY =
+                    (pos.y + 0.05f <= i.vertices.get(3).y + 0.1f && i.vertices.get(3).y <= pos.y + 0.05f) ||
                     (pos.y - 0.05f <= i.vertices.get(3).y + 0.1f && i.vertices.get(3).y <= pos.y + 0.05f);
 
             if (collisionX && collisionY) {
@@ -511,20 +523,17 @@ public class Main {
     public static int fact(int n) {
         if (n >= 1)
             return n * fact(n - 1);
-        else
-            return 1;
+        return 1;
     }
 
     public static int combi(int n, int i) {
-        return fact(n) / (fact(n-i) * fact(i));
+        return (fact(n) / (fact(n-i) * fact(i)));
     }
 
     public static ArrayList<Integer> pascal(int n) {
         ArrayList<Integer> res = new ArrayList<>();
-
         for (int i = 0; i < n; i++)
             res.add(combi(n - 1, i));
-
         return res;
     }
 

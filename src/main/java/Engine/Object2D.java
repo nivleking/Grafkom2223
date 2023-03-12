@@ -97,7 +97,7 @@ public class Object2D extends ShaderProgram{
         drawSetup();
         glLineWidth(10);
         glPointSize(10);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, vertices.size());
+        glDrawArrays(GL_POLYGON, 0, vertices.size());
     }
 
     public void drawLine() {
