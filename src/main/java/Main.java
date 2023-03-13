@@ -42,6 +42,113 @@ public class Main {
         //codingan harus taruh ditaruh di bagian bawah beriikut:
         //code
 
+//        planets.add(new Sphere(
+//                Arrays.asList(
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//                ),
+//                new ArrayList<>(
+//                        List.of()
+//                ),
+//                new Vector4f(0, 1, 0, 1.0f),
+//                new Vector3f(0f, 0f, 0f),
+//                .3f,
+//                .3f,
+//                .3f,
+//                36, 18
+//        ));
+//        planets.get(0).createSphere();
+//
+//        planets.add(new Sphere(
+//                Arrays.asList(
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//                ),
+//                new ArrayList<>(
+//                        List.of()
+//                ),
+//                new Vector4f(1, 1, 1, 1.0f),
+//                new Vector3f(-0.4f, 0f, 0f),
+//                .05f,
+//                .05f,
+//                .05f,
+//                36, 18
+//        ));
+//
+//        planets.get(1).createSphere();
+//
+//        planets.add(new Sphere(
+//                Arrays.asList(
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//                ),
+//                new ArrayList<>(
+//                        List.of()
+//                ),
+//                new Vector4f(1, 0.7f, 0, 1.0f),
+//                new Vector3f(-0.55f, 0f, 0f),
+//                .05f,
+//                .05f,
+//                .05f,
+//                36, 18
+//        ));
+//
+//        planets.get(2).createSphere();
+//
+//        planets.add(new Sphere(
+//                Arrays.asList(
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//                ),
+//                new ArrayList<>(
+//                        List.of()
+//                ),
+//                new Vector4f(0, 0, 1, 1.0f),
+//                new Vector3f(-0.7f, 0f, 0f),
+//                .05f,
+//                .05f,
+//                .05f,
+//                36, 18
+//        ));
+//
+//        planets.get(3).createSphere();
+//
+//        planets.add(new Sphere(
+//                Arrays.asList(
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//                ),
+//                new ArrayList<>(
+//                        List.of()
+//                ),
+//                new Vector4f(1, 0.7f, 0, 1.0f),
+//                new Vector3f(-0.85f, 0f, 0f),
+//                .05f,
+//                .05f,
+//                .05f,
+//                36, 18
+//        ));
+//
+//        planets.get(4).createSphere();
+//
+//        planets.add(new Sphere(
+//                Arrays.asList(
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//                ),
+//                new ArrayList<>(
+//                        List.of()
+//                ),
+//                new Vector4f(1, 0.7f, 0, 1.0f),
+//                new Vector3f(-0.95f, 0f, 0f),
+//                .025f,
+//                .025f,
+//                .025f,
+//                36, 18
+//        ));
+//
+//        planets.get(5).createSphere();
+
         //matahari
         sphere.add(new Sphere(
                 Arrays.asList(
@@ -474,11 +581,54 @@ public class Main {
             sphere.get(0).translateObject(0.0f,0.0f,0.0f);
         }
 
+//        if (window.isKeyPressed(GLFW_KEY_F)) {
+//            for (int i = 1; i < planets.size() - 1; i++)
+//                planets.get(i).rotateObject((float)Math.toRadians(0.5f), 0, 0, 1);
+//        }
+//
+//        // rotasi
+//        if (window.isKeyPressed(GLFW_KEY_G)) {
+//            for (int i = 1; i < planets.size(); i++) {
+//                planets.get(i).translateObject(
+//                        -planets.get(i).centerPoint.x,
+//                        -planets.get(i).centerPoint.y,
+//                        -planets.get(i).centerPoint.z
+//                );
+//
+//                planets.get(i).rotateObject((float) Math.toRadians(0.5f), 0f, 1f, 0f);
+//
+//                planets.get(i).centerPoint.x = planets.get(i).radiusX * (float)(Math.cos(Math.toRadians(planets.get(i).currAngle)));
+//                planets.get(i).centerPoint.y = planets.get(i).radiusY * (float)(Math.sin(Math.toRadians(planets.get(i).currAngle)));
+//
+//                if (planets.get(i).currAngle + 1 < 360)
+//                    planets.get(i).currAngle++;
+//                else
+//                    planets.get(i).currAngle = 0;
+//
+//                System.out.println(planets.get(i).centerPoint);
+//
+//                planets.get(i).translateObject(
+//                        planets.get(i).centerPoint.x,
+//                        planets.get(i).centerPoint.y,
+//                        planets.get(i).centerPoint.z
+//                );
+//            }
+//        }
+//
+//        // bulan
+//        if (window.isKeyPressed(GLFW_KEY_H)) {
+//            planets.get(5).rotateObject((float)Math.toRadians(0.5f), 0, 0, 1);
+//        }
+
         if (window.isKeyPressed((GLFW_KEY_F))) {
-            sphere.get(1).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
-            sphere.get(2).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
-            sphere.get(3).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
-            sphere.get(5).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
+            //merkurius
+            sphere.get(1).rotateObject((float) Math.toRadians(0.8f),0.0f,0.0f,0.6f);
+            //venus
+            sphere.get(2).rotateObject((float) Math.toRadians(0.6f),0.0f,0.0f,0.4f);
+            //bumi
+            sphere.get(3).rotateObject((float) Math.toRadians(0.4f),0.0f,0.0f,0.6f);
+            //mars
+            sphere.get(5).rotateObject((float) Math.toRadians(0.2f),0.0f,0.0f,0.6f);
         }
 
         if (window.isKeyPressed(GLFW_KEY_G)) {
@@ -490,6 +640,13 @@ public class Main {
             sphere.get(3).translateObject(0.0f,0.0f,0.0f);
             sphere.get(5).rotateObject((float) Math.toRadians(0.5f),4.1f,4.1f,0.4f);
             sphere.get(5).translateObject(0.0f,0.0f,0.0f);
+        }
+
+        if (window.isKeyPressed((GLFW_KEY_F))) {
+            sphere.get(1).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
+            sphere.get(2).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
+            sphere.get(3).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
+            sphere.get(5).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
         }
 
         //buat function if di bawah ini untuk increment indexnya
