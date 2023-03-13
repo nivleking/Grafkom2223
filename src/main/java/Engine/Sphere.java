@@ -22,12 +22,12 @@ public class Sphere extends Circle{
         this.radiusZ = radiusZ;
         this.sectorCount = sectorCount;
         this.stackCount = stackCount;
-//        createSphere();
+        createSphere();
 //        createHyperboloid();
 //        createHyperboloid2();
 //        ellipticCone();
 //        ellipticParaboloid();
-        hyperboloidParabolic();
+//        hyperboloidParabolic();
         setVAOVBO();
     }
 
