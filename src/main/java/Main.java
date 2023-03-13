@@ -41,6 +41,8 @@ public class Main {
 
         //codingan harus taruh ditaruh di bagian bawah beriikut:
         //code
+
+        //matahari
         sphere.add(new Sphere(
                 Arrays.asList(
                         //shaderFile lokasi menyesuaikan objectnya
@@ -48,10 +50,95 @@ public class Main {
                         new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
                 ),
                 new ArrayList<>(),
-                new Vector4f(0,1,0,1),
-                Arrays.asList(0f, 0f,0f),
-                0.5f, 0.5f, 0.5f
+                new Vector4f(0.8f,0.6f,0.0f,1),
+                Arrays.asList(0f, 0f, 0f),
+                0.01f, 0.01f, 0.01f
         ));
+        //translasi, menggeser kanan
+        sphere.get(0).translateObject(0.0f,0.0f,0.0f);
+        sphere.get(0).scaleObject(0.3f,0.3f,0.3f);
+
+        //merkurius
+        sphere.add(new Sphere(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(),
+                new Vector4f(0.5f,0.5f,0.5f,1),
+                Arrays.asList(0f, 0f, 0f),
+                0.01f, 0.01f, 0.01f
+        ));
+        //translasi, menggeser kanan
+        sphere.get(1).translateObject(2.0f,2.0f,0.0f);
+        sphere.get(1).scaleObject(0.1f,0.1f,0.1f);
+
+        //venus
+        sphere.add(new Sphere(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(),
+                new Vector4f(0.7f,0.6f,0.0f,1),
+                Arrays.asList(0f, 0f, 0f),
+                0.01f, 0.01f, 0.01f
+        ));
+        //translasi, menggeser kanan
+        sphere.get(2).translateObject(1.7f,1.7f,0.0f);
+        sphere.get(2).scaleObject(0.2f,0.2f,0.2f);
+//
+
+//
+        //bumi
+        sphere.add(new Sphere(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(),
+                new Vector4f(0.5f,0.8f,0.9f,1.0f),
+                Arrays.asList(0f, 0f, 0f),
+                0.01f, 0.01f, 0.01f
+        ));
+        //translasi, menggeser kanan
+        sphere.get(3).translateObject(2.4f,2.4f,0.0f);
+        sphere.get(3).scaleObject(0.23f,0.23f,0.23f);
+//
+//        //bulan
+        sphere.add(new Sphere(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(),
+                new Vector4f(0.5f,0.5f,0.5f,1.0f),
+                Arrays.asList(0f, 0f, 0f),
+                0.01f, 0.01f, 0.01f
+        ));
+        //translasi, menggeser kanan
+        sphere.get(4).translateObject(14.0f,14.0f,0.0f);
+        sphere.get(4).scaleObject(0.05f,0.05f,0.05f);
+
+        //        //mars
+        sphere.add(new Sphere(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(),
+                new Vector4f(1.0f,0.0f,0.0f,1),
+                Arrays.asList(0f, 0f, 0f),
+                0.01f, 0.01f, 0.01f
+        ));
+        //translasi, menggeser kanan
+        sphere.get(5).translateObject(4.1f,4.1f,0.0f);
+        sphere.get(5).scaleObject(0.2f,0.2f,0.2f);
 
 //        object2DS.add(new Object2D(
 //                Arrays.asList(
@@ -383,7 +470,26 @@ public class Main {
 
     public void input() {
         if (window.isKeyPressed((GLFW_KEY_W))) {
-            System.out.println("W");
+            sphere.get(0).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,1.0f);
+            sphere.get(0).translateObject(0.0f,0.0f,0.0f);
+        }
+
+        if (window.isKeyPressed((GLFW_KEY_F))) {
+            sphere.get(1).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
+            sphere.get(2).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
+            sphere.get(3).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
+            sphere.get(5).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,0.4f);
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_G)) {
+            sphere.get(1).rotateObject((float) Math.toRadians(0.5f),2.0f,2.0f,0.4f);
+            sphere.get(1).translateObject(0.0f,0.0f,0.0f);
+            sphere.get(2).rotateObject((float) Math.toRadians(0.5f),1.7f,1.7f,0.4f);
+            sphere.get(2).translateObject(0.0f,0.0f,0.0f);
+            sphere.get(3).rotateObject((float) Math.toRadians(0.5f),2.4f,2.4f,0.4f);
+            sphere.get(3).translateObject(0.0f,0.0f,0.0f);
+            sphere.get(5).rotateObject((float) Math.toRadians(0.5f),4.1f,4.1f,0.4f);
+            sphere.get(5).translateObject(0.0f,0.0f,0.0f);
         }
 
         //buat function if di bawah ini untuk increment indexnya

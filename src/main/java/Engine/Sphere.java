@@ -352,9 +352,9 @@ public class Sphere extends Circle{
 //        glDrawElements(GL_LINE_STRIP, index.size(), GL_UNSIGNED_INT, 0);
 
         drawSetup();
-        glLineWidth(3); //ketebalan garis
-        glPointSize(3); //besar kecil vertex
-        glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
+        glLineWidth(10); //ketebalan garis
+        glPointSize(10); //besar kecil vertex
+        glDrawArrays(GL_POLYGON, 0, vertices.size());
     }
 
     public void drawIndices() {

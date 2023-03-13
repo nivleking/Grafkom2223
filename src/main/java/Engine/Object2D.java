@@ -1,5 +1,6 @@
 package Engine;
 
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
@@ -24,6 +25,10 @@ public class Object2D extends ShaderProgram{
 
     int vboColor;
 
+    Matrix4f model;
+
+
+    //uni color
     public Object2D(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color) {
         super(shaderModuleDataList);
         this.vertices = vertices;
@@ -31,8 +36,25 @@ public class Object2D extends ShaderProgram{
         uniformsMap = new UniformsMap(getProgramId());
         uniformsMap.createUniform("uni_color");
         this.color = color;
+        uniformsMap.createUniform("model");
+
+        //defaultnya sudah .identity() jadi gk perlu dituliskan
+        model = new Matrix4f();
     }
 
+    public void translateObject(Float offsetX, Float offsetY, Float offsetZ){
+        model = new Matrix4f().translate(offsetX,offsetY,offsetZ).mul(new Matrix4f(model));
+    }
+
+    public void rotateObject(Float degree, Float offsetX, Float offsetY, Float offsetZ){
+        model = new Matrix4f().rotate(degree,offsetX,offsetY,offsetZ).mul(new Matrix4f(model));
+    }
+
+    public void scaleObject(Float scaleX, Float offsetY, Float offsetZ){
+        model = new Matrix4f().scale(scaleX,offsetY,offsetZ).mul(new Matrix4f(model));
+    }
+
+    //vertices color
     public Object2D(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, List<Vector3f> verticesColor) {
         super(shaderModuleDataList);
         this.vertices = vertices;
@@ -73,6 +95,7 @@ public class Object2D extends ShaderProgram{
     public void drawSetup() {
         bind();
         uniformsMap.setUniform("uni_color", color);
+        uniformsMap.setUniform("model", model);
         //dari vert ke frag lalu vert ke layar
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
